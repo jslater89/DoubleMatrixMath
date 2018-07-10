@@ -3,13 +3,13 @@
 
 #define N  (2)
 
-float A[N][N];
-float B[N][N];
-float C[N][N];
-float v[N];      // This is a row vector
-float w[N];
+double A[N][N];
+double B[N][N];
+double C[N][N];
+double v[N];      // This is a row vector
+double w[N];
 
-float max = 10;  // maximum random matrix entry range
+double max = 10;  // maximum random matrix entry range
 
 void setup()
 {
@@ -38,39 +38,39 @@ void setup()
 void loop()
 {
 
-	Matrix.Multiply((float*)A, (float*)B, N, N, N, (float*)C);
+	Matrix.Multiply((double*)A, (double*)B, N, N, N, (double*)C);
 
 	Serial.println("\nAfter multiplying C = A*B:");
-	Matrix.Print((float*)A, N, N, "A");
+	Matrix.Print((double*)A, N, N, "A");
 
-	Matrix.Print((float*)B, N, N, "B");
-	Matrix.Print((float*)C, N, N, "C");
-	Matrix.Print((float*)v, N, 1, "v");
+	Matrix.Print((double*)B, N, N, "B");
+	Matrix.Print((double*)C, N, N, "C");
+	Matrix.Print((double*)v, N, 1, "v");
 
-	Matrix.Add((float*) B, (float*) C, N, N, (float*) C);
+	Matrix.Add((double*) B, (double*) C, N, N, (double*) C);
 	Serial.println("\nC = B+C (addition in-place)");
-	Matrix.Print((float*)C, N, N, "C");
-	Matrix.Print((float*)B, N, N, "B");
+	Matrix.Print((double*)C, N, N, "C");
+	Matrix.Print((double*)B, N, N, "B");
 
-	Matrix.Copy((float*)A, N, N, (float*)B);
+	Matrix.Copy((double*)A, N, N, (double*)B);
 	Serial.println("\nCopied A to B:");
-	Matrix.Print((float*)B, N, N, "B");
+	Matrix.Print((double*)B, N, N, "B");
 
-	Matrix.Invert((float*)A, N);
+	Matrix.Invert((double*)A, N);
 	Serial.println("\nInverted A:");
-	Matrix.Print((float*)A, N, N, "A");
+	Matrix.Print((double*)A, N, N, "A");
 
-	Matrix.Multiply((float*)A, (float*)B, N, N, N, (float*)C);
+	Matrix.Multiply((double*)A, (double*)B, N, N, N, (double*)C);
 	Serial.println("\nC = A*B");
-	Matrix.Print((float*)C, N, N, "C");
+	Matrix.Print((double*)C, N, N, "C");
 
 	// Because the library uses pointers and DIY indexing,
 	// a 1D vector can be smoothly handled as either a row or col vector
 	// depending on the dimensions we specify when calling a function
-	Matrix.Multiply((float*)C, (float*)v, N, N, 1, (float*)w);
+	Matrix.Multiply((double*)C, (double*)v, N, N, 1, (double*)w);
 	Serial.println("\n C*v = w:");
-	Matrix.Print((float*)v, N, 1, "v");
-	Matrix.Print((float*)w, N, 1, "w");
+	Matrix.Print((double*)v, N, 1, "v");
+	Matrix.Print((double*)w, N, 1, "w");
 
 	while(1);
 }
